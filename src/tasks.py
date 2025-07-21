@@ -13,7 +13,7 @@ class BlogTasks:
             description=f"Com base no resumo da pesquisa sobre '{topic}' (disponível no contexto da tarefa anterior) e nas melhores práticas de SEO e engajamento, crie uma estrutura detalhada para o artigo de blog. A estrutura deve incluir: uma introdução envolvente, 3 a 5 tópicos principais com subseções claras, e uma conclusão impactante. Para cada seção, inclua um breve descritivo do que deve ser abordado. O resultado deve ser a estrutura formatada.",
             expected_output=f"Uma estrutura completa e lógica para o artigo de blog sobre '{topic}', formatada claramente com títulos de seção e descrições para cada parte: Introdução, Tópicos Principais (com subseções se aplicável) e Conclusão.",
             agent=agent,
-            context=[context]
+            context=context
         )
 
     def write_content_task(self, agent, topic, tone, context):
@@ -29,5 +29,13 @@ class BlogTasks:
             description=f"Com base no artigo completo sobre '{topic}' (disponível no contexto), gere pelo menos 3 títulos alternativos criativos e otimizados. Em seguida, formate a saída final. O resultado final deve conter o artigo completo primeiro, seguido por uma seção clara com os títulos sugeridos.",
             expected_output=f"A saída final formatada em markdown contendo o artigo de blog completo sobre '{topic}', seguido pela seção '--- Títulos Alternativos ---' e uma lista numerada de no mínimo 3 títulos de blog criativos.",
             agent=agent,
-            context=[context]
+            context=context
+        )
+
+    def revise_and_format_task(self, agent, topic, context):
+        return Task(
+            description=f"Com base no artigo completo e nos títulos sugeridos (disponíveis no contexto), sua primeira ação é escolher o melhor e mais impactante título da lista fornecida. Em seguida, revise todo o conteúdo para corrigir erros gramaticais, de pontuação e de digitação. Verifique a coesão, a clareza e o fluxo do texto. Finalmente, formate o artigo final em Markdown, utilizando o título escolhido como o título principal. Adicione subtítulos (H2, H3), listas e outros elementos de formatação para melhorar a legibilidade. O resultado final deve ser um artigo impecável, pronto para publicação.",
+            expected_output=f"O artigo de blog final sobre '{topic}', completamente revisado e formatado profissionalmente em Markdown. O artigo deve começar com o título principal escolhido, seguido pelo conteúdo bem estruturado com subtítulos, parágrafos claros e quaisquer outros elementos de formatação relevantes (como listas ou negrito) para uma excelente experiência de leitura.",
+            agent=agent,
+            context=context
         )

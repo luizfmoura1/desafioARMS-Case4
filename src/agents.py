@@ -54,3 +54,13 @@ class BlogAgents:
             allow_delegation=False,
             llm=llm
         )
+    
+    def reviser_formatter_agent(self):
+        return Agent(
+            role='Revisor e Formatador de Artigo',
+            goal='Revisar o artigo de blog finalizado para corrigir erros gramaticais e de digitação, garantir a coesão e a clareza do texto, e formatar o conteúdo em Markdown para uma apresentação limpa e profissional.',
+            backstory="Um perfeccionista com um olhar aguçado para detalhes, especializado em polir textos para publicação, garantindo que a qualidade final seja impecável e a leitura agradável.",
+            verbose=True,
+            allow_delegation=False,
+            llm=llm
+        )
