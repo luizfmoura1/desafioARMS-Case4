@@ -3,20 +3,25 @@ from langchain_openai import ChatOpenAI
 from dotenv import load_dotenv
 import os
 
+from crewai_tools import SerperDevTool
+
 load_dotenv()
 
 llm = ChatOpenAI(model="gpt-4.1-mini",
-    temperature=0.7,
-    openai_api_key=os.getenv("OPENAI_API_KEY"))
+                 temperature=0.7,
+                 openai_api_key=os.getenv("OPENAI_API_KEY"))
+
+search_tool = SerperDevTool()
 
 class BlogAgents:
     def researcher_agent(self):
         return Agent(
             role='Pesquisador de Tema',
-            goal='Coletar informações abrangentes e detalhadas sobre um tema específico para um artigo de blog.',
+            goal='Coletar informações abrangentes e detalhadas sobre um tema específico para um artigo de blog, utilizando ferramentas de busca na internet.',
             backstory="Responsável por vasculhar fontes e compilar dados relevantes para embasar o conteúdo.",
             verbose=True,
             allow_delegation=False,
+            tools=[search_tool],
             llm=llm
         )
 
